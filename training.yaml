@@ -1,0 +1,49 @@
+# train_lora_qwen3_8b.yaml
+
+stage: sft
+do_train: true
+
+model_name_or_path: /home/user/.cache/huggingface/hub/models--Qwen--Qwen3-8B/snapshots/9c925d64d72725edaf899c6cb9c377fd0709d9c5 # 模型路径
+template: qwen3 # 模型模板
+trust_remote_code: true
+finetuning_type: lora # 微调类型：[lora, qlora, p-tuning, adapter, full]
+
+dataset_dir: /home/user/LLaMA-Factory/data # 数据集目录
+dataset: sft_r1_data
+cutoff_len: 2048
+max_samples: 100000
+preprocessing_num_workers: 16
+
+output_dir: saves/Qwen3-8B-Instruct/lora/train_2025-06-29-13-53-33 # 输出目录
+overwrite_output_dir: true
+
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 8
+num_train_epochs: 3.0
+learning_rate: 5.0e-5 # 必须加小数点.0，不然会报错
+lr_scheduler_type: cosine
+warmup_steps: 0
+max_grad_norm: 1.0
+
+optim: adamw_torch
+packing: false
+enable_thinking: true
+include_num_input_tokens_seen: true
+
+fp16: true # 是否使用半精度训练
+flash_attn: auto
+
+logging_steps: 5
+save_steps: 100
+ddp_timeout: 180000000
+
+# 可视化设置
+use_swanlab: true
+swanlab_project: llamafactory
+swanlab_run_name: Qwen3-8B-Instruct
+
+# LoRA 配置
+lora_rank: 8
+lora_alpha: 16
+lora_dropout: 0
+lora_target: all
