@@ -5,7 +5,7 @@
 - 基础模型： [Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B)
 - 微调后模型： Qwen3-8B-Medical
 - 数据集： [delicate_medical_r1_data](https://modelscope.cn/datasets/krisfu/delicate_medical_r1_data)
-- 微调方式：全参数微调， LoRA微调
+- 微调方式： LoRA微调
 - 算力： RTX 4090（24GB显存） * 8 分布式微调
 
 > 如果需要进一步降低显存需求，可以使用Qwen3-0.6B模型，或调低`MAX_LENGTH`
